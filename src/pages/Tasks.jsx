@@ -1,5 +1,6 @@
 import { BellIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import MyTasks from "../components/tasks/MyTasks";
+import TaskCard from "../components/tasks/TaskCard";
 
 const Tasks = () => {
   return (
@@ -35,8 +36,7 @@ const Tasks = () => {
               </p>
             </div>
             <div className="space-y-3">
-              {/* <TaskCard /> */}
-              <h4>task card</h4>
+              <TaskCard />
             </div>
           </div>
           <div className="relative h-[800px] overflow-auto">
@@ -47,21 +47,19 @@ const Tasks = () => {
               </p>
             </div>
             <div className="space-y-3">
-              {/* <TaskCard />
-              <TaskCard /> */}
-              <h4>task card</h4>
+              <TaskCard />
+              <TaskCard />
             </div>
           </div>
           <div className="relative h-[800px] overflow-auto">
             <div className="flex sticky top-0 justify-between bg-purple-500 text-white p-5 rounded-md mb-3">
-              <h1>Up Next</h1>
+              <h1>Completed</h1>
               <p className="bg-primary text-white w-6 h-6 grid place-content-center rounded-md">
                 0
               </p>
             </div>
             <div className="space-y-3">
-              {/* <TaskCard /> */}
-              <h4>task card</h4>
+              <TaskCard />
             </div>
           </div>
         </div>
