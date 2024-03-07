@@ -1,10 +1,21 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { ArrowRightIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useDispatch } from "react-redux";
-import { removeTask } from "../../redux/features/task/taskSlice";
+import { removeTask, updateStatus } from "../../redux/features/task/taskSlice";
 
 const TaskCard = ({ task }) => {
   const dispatch = useDispatch();
+
+  let updatedStatus;
+  if (task.status === "pending") {
+    updatedStatus = "running";
+  } else if (task.status === "running") {
+    updatedStatus = "done";
+  } else {
+    updatedStatus = "archive";
+  }
+
   return (
     <div className="bg-secondary/10 rounded-md p-5 bg-gray-100 border border-gray-400">
       <h1
@@ -24,7 +35,12 @@ const TaskCard = ({ task }) => {
           <button onClick={() => dispatch(removeTask(task?.id))} title="Delete">
             <TrashIcon className="h-5 w-5 text-red-500" />
           </button>
-          <button title="In progress">
+          <button
+            onClick={() =>
+              dispatch(updateStatus({ id: task.id, status: updatedStatus }))
+            }
+            title="In progress"
+          >
             <ArrowRightIcon className="h-5 w-5 text-primary" />
           </button>
         </div>
