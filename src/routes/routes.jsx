@@ -6,6 +6,7 @@ import Chat from "../pages/Chat";
 import Setting from "../pages/Setting";
 import PrivateRoute from "../components/layouts/PrivateRoute";
 import Archive from "../pages/Archive";
+import Login from "../pages/Login";
 
 export const routes = createBrowserRouter([
   {
@@ -35,7 +36,11 @@ export const routes = createBrowserRouter([
     ],
   },
   {
-    path: "/login",
+    path: "/signup",
     element: <SignUp />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
 ]);
