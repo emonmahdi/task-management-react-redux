@@ -4,11 +4,17 @@ import SignUp from "../pages/SignUp";
 import Tasks from "../pages/Tasks";
 import Chat from "../pages/Chat";
 import Setting from "../pages/Setting";
+import PrivateRoute from "../components/layouts/PrivateRoute";
+import Archive from "../pages/Archive";
 
 export const routes = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <PrivateRoute>
+        <App />
+      </PrivateRoute>
+    ),
     children: [
       {
         index: true,
@@ -21,6 +27,10 @@ export const routes = createBrowserRouter([
       {
         path: "/setting",
         element: <Setting />,
+      },
+      {
+        path: "/archive",
+        element: <Archive />,
       },
     ],
   },
