@@ -1,19 +1,19 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/analytics";
+import { getAuth } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: import.meta.env.REACT_VITE_apiKey,
-  authDomain: import.meta.env.REACT_VITE_authDomain,
-  projectId: import.meta.env.REACT_VITE_projectId,
-  storageBucket: import.meta.env.REACT_VITE_storageBucket,
-  messagingSenderId: import.meta.env.REACT_VITE_messagingSenderId,
-  appId: import.meta.env.REACT_VITE_appId,
-  measurementId: import.meta.env.REACT_VITE_measurementId,
+  apiKey: "AIzaSyAiZkg7odt3RwmixHDR5E_fh6GXVgDCfd8",
+  authDomain: "redux-task-management.firebaseapp.com",
+  projectId: "redux-task-management",
+  storageBucket: "redux-task-management.appspot.com",
+  messagingSenderId: "437718694923",
+  appId: "1:437718694923:web:f7a910ae5c69eae293db0e",
+  measurementId: "G-KWVX47Y7Z1",
 };
 
 // Initialize Firebase
