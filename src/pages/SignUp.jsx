@@ -40,7 +40,7 @@ const SignUp = () => {
 
   useEffect(() => {
     if (isError && error) {
-      toast.error(error);
+      toast.error(error); 
     }
   }, [isError, error]);
 
