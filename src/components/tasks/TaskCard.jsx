@@ -3,7 +3,7 @@
 import { ArrowRightIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useDispatch } from "react-redux";
 import { removeTask, updateStatus } from "../../redux/features/task/taskSlice";
-import { useUpdateTaskMutation } from "../../redux/features/api/baseApi";
+import { useUpdateTaskMutation } from "../../redux/features/task/taskApi";
 
 const TaskCard = ({ task }) => {
   const dispatch = useDispatch();

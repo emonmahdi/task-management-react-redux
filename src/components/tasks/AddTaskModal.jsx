@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
+import { useAddTaskMutation } from "../../redux/features/task/taskApi";
 import Modal from "../ui/Modal";
 import { useForm } from "react-hook-form";
-import { useAddTaskMutation } from "../../redux/features/api/baseApi";
 
 const AddTaskModal = ({ isOpen, setIsOpen, title }) => {
   const { register, handleSubmit, reset } = useForm();

@@ -4,7 +4,7 @@ import TaskCard from "../components/tasks/TaskCard";
 import { useState } from "react";
 import AddTaskModal from "../components/tasks/AddTaskModal";
 import MenuDropdown from "../components/ui/MenuDropdown";
-import { useGetTasksQuery } from "../redux/features/api/baseApi";
+import { useGetTasksQuery } from "../redux/features/task/taskApi";
 
 const Tasks = () => {
   const [isOpen, setIsOpen] = useState(false);
