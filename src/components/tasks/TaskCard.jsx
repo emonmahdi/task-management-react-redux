@@ -3,9 +3,12 @@
 import { ArrowRightIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useDispatch } from "react-redux";
 import { removeTask, updateStatus } from "../../redux/features/task/taskSlice";
+import { useUpdateTaskMutation } from "../../redux/features/api/baseApi";
 
 const TaskCard = ({ task }) => {
   const dispatch = useDispatch();
+
+  const [updateTask, { data, error }] = useUpdateTaskMutation();
 
   let updatedStatus;
   if (task.status === "pending") {
@@ -15,6 +18,18 @@ const TaskCard = ({ task }) => {
   } else {
     updatedStatus = "archive";
   }
+
+  const handleUpdate = (id, updatedStatus) => {
+    const data = {
+      status: updatedStatus,
+    };
+    const options = {
+      id: id,
+      data: data,
+    };
+
+    updateTask(options);
+  };
 
   return (
     <div className="bg-secondary/10 rounded-md p-5 bg-gray-100 border border-gray-400">
@@ -36,9 +51,7 @@ const TaskCard = ({ task }) => {
             <TrashIcon className="h-5 w-5 text-red-500" />
           </button>
           <button
-            onClick={() =>
-              dispatch(updateStatus({ id: task.id, status: updatedStatus }))
-            }
+            onClick={() => handleUpdate(task._id, updatedStatus)}
             title="In progress"
           >
             <ArrowRightIcon className="h-5 w-5 text-primary" />

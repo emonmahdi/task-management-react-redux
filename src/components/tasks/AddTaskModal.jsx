@@ -1,13 +1,15 @@
 /* eslint-disable react/prop-types */
-import { useDispatch } from "react-redux";
 import Modal from "../ui/Modal";
 import { useForm } from "react-hook-form";
-import { addTask } from "../../redux/features/task/taskSlice";
+import { useAddTaskMutation } from "../../redux/features/api/baseApi";
 
 const AddTaskModal = ({ isOpen, setIsOpen, title }) => {
   const { register, handleSubmit, reset } = useForm();
 
-  const dispatch = useDispatch();
+  const [addTask, { data, error }] = useAddTaskMutation();
+
+  console.log(data);
+  console.log(error);
 
   const onCancel = () => {
     reset();
@@ -15,7 +17,7 @@ const AddTaskModal = ({ isOpen, setIsOpen, title }) => {
   };
 
   const onSubmit = (data) => {
-    dispatch(addTask(data));
+    addTask({ ...data, status: "pending" });
     onCancel();
   };
   return (
