@@ -5,11 +5,14 @@ import { useState } from "react";
 import AddTaskModal from "../components/tasks/AddTaskModal";
 import MenuDropdown from "../components/ui/MenuDropdown";
 import { useGetTasksQuery } from "../redux/features/task/taskApi";
+import { useSelector } from "react-redux";
 
 const Tasks = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { data: tasks } = useGetTasksQuery();
+
+  const { email } = useSelector((state) => state.userSlice);
 
   const pendingTasks = tasks?.filter((item) => item.status === "pending");
   const runningTasks = tasks?.filter((item) => item.status === "running");
@@ -35,6 +38,7 @@ const Tasks = () => {
             >
               Add Task
             </button>
+            <p>emil: {email}</p>
             <AddTaskModal
               isOpen={isOpen}
               setIsOpen={setIsOpen}

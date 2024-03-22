@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import loginImage from "../assets/image/login2.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../redux/features/user/userSlice";
+import { googleLogin, loginUser } from "../redux/features/user/userSlice";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 const Login = () => {
@@ -33,7 +33,11 @@ const Login = () => {
   }, [isLoading, email]);
 
   const handleGoogleLogin = () => {
-    //  Google Login
+    // Google Login
+    dispatch(googleLogin());
+    if (email) {
+      navigate("/");
+    }
   };
 
   return (

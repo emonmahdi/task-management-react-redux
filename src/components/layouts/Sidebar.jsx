@@ -53,7 +53,7 @@ const Sidebar = () => {
           <Cog6ToothIcon className="h-7 w-7 group-hover:text-white " />
         </NavLink>
         <NavLink
-          to="/setting"
+          to="/profile"
           className={({ isActive }) =>
             isActive
               ? "p-2 rounded-2xl bg-primary text-white cursor-pointer mt-auto"

@@ -5,6 +5,7 @@ import { Fragment } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/features/user/userSlice";
 import auth from "../../utils/firebase.config";
+import { Link } from "react-router-dom";
 
 export default function MenuDropdown({ children }) {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ export default function MenuDropdown({ children }) {
                     active ? "bg-primary text-white" : "text-gray-900"
                   } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                 >
-                  Profile
+                  <Link to="/profile">Profile</Link>
                 </button>
               )}
             </Menu.Item>
