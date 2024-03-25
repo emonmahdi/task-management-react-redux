@@ -3,12 +3,22 @@
 import { ArrowRightIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useDispatch } from "react-redux";
 import { removeTask, updateStatus } from "../../redux/features/task/taskSlice";
-import { useUpdateTaskMutation } from "../../redux/features/task/taskApi";
+import {
+  useDeleteTaskMutation,
+  useUpdateTaskMutation,
+} from "../../redux/features/task/taskApi";
+import toast, { Toaster } from "react-hot-toast";
 
 const TaskCard = ({ task }) => {
   const dispatch = useDispatch();
 
   const [updateTask, { data, error }] = useUpdateTaskMutation();
+  const [deleteTask, { isLoading }] = useDeleteTaskMutation();
+
+  const handleRemoveTask = (taskId) => {
+    deleteTask(taskId);
+    toast.success("Task removed successfully");
+  };
 
   let updatedStatus;
   if (task.status === "pending") {
@@ -33,6 +43,7 @@ const TaskCard = ({ task }) => {
 
   return (
     <div className="bg-secondary/10 rounded-md p-5 bg-gray-100 border border-gray-400">
+      <Toaster />
       <h1
         className={`text-lg font-semibold mb-3  ${
           task?.priority === "high" ? "text-red-500" : ""
@@ -47,7 +58,7 @@ const TaskCard = ({ task }) => {
       <div className="flex justify-between mt-3">
         <p>{task?.date}</p>
         <div className="flex gap-3">
-          <button onClick={() => dispatch(removeTask(task?.id))} title="Delete">
+          <button onClick={() => handleRemoveTask(task?._id)} title="Delete">
             <TrashIcon className="h-5 w-5 text-red-500" />
           </button>
           <button
