@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createUser, googleLogin } from "../redux/features/user/userSlice";
 import toast, { Toaster } from "react-hot-toast";
+import { useAddUserMutation } from "../redux/features/task/taskApi";
 
 const SignUp = () => {
   const { handleSubmit, register, control } = useForm();
@@ -17,7 +18,8 @@ const SignUp = () => {
     (state) => state.userSlice
   );
   const dispatch = useDispatch();
-
+  const [addUser] = useAddUserMutation();
+  console.log(addUser);
   useEffect(() => {
     if (
       password !== undefined &&
