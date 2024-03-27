@@ -13,7 +13,7 @@ const AddTaskModal = ({ isOpen, setIsOpen, title }) => {
   console.log(error);
 
   const { data: users } = useGetUsersQuery();
-  console.log(users);
+  // console.log(users);
   const onCancel = () => {
     reset();
     setIsOpen(false);
@@ -63,7 +63,7 @@ const AddTaskModal = ({ isOpen, setIsOpen, title }) => {
           >
             {users?.map((user) => {
               return (
-                <option key={user._id} value={user?.name}>
+                <option key={user._id} value={user?.email}>
                   {user?.name}
                 </option>
               );

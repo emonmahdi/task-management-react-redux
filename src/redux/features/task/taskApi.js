@@ -6,6 +6,12 @@ const taskApi = baseApi.injectEndpoints({
       query: () => "/tasks",
       providesTags: ["Tasks", "Users"],
     }),
+    getTasksByEmail: builder.query({
+      query: (assignedTo) => ({
+        url: `/tasks/${assignedTo}`,
+      }),
+      providesTags: ["Tasks", "Users"],
+    }),
     updateTask: builder.mutation({
       query: ({ id, data }) => ({
         url: `/tasks/${id}`,
@@ -46,6 +52,7 @@ export const {
   useUpdateTaskMutation,
   useDeleteTaskMutation,
   useAddUserMutation,
+  useGetTasksByEmailQuery,
 } = taskApi;
 
 export default taskApi;

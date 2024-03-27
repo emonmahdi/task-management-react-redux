@@ -9,10 +9,14 @@ import {
   updateStatus,
 } from "../../redux/features/task/taskSlice";
 import TaskDetailsModal from "./TaskDetailsModal";
+import { useGetTasksByEmailQuery } from "../../redux/features/task/taskApi";
 
 const MyTasks = () => {
-  const { tasks, userTasks } = useSelector((state) => state.taskSlice);
-  const { name: userName } = useSelector((state) => state.userSlice);
+  const { tasks } = useSelector((state) => state.taskSlice);
+  const { email: userEmail } = useSelector((state) => state.userSlice);
+
+  const { data: userSpecificTask } = useGetTasksByEmailQuery(userEmail);
+  console.log(userSpecificTask);
 
   const dispatch = useDispatch();
   const [taskId, setTaskId] = useState(0);
@@ -24,23 +28,23 @@ const MyTasks = () => {
   };
 
   useEffect(() => {
-    dispatch(setUserTasks(userName));
-  }, [userName, dispatch, tasks]);
+    dispatch(setUserTasks(userEmail));
+  }, [userEmail, dispatch, tasks]);
 
   return (
     <div>
       <TaskDetailsModal isOpen={isOpen} setIsOpen={setIsOpen} id={taskId} />
       <h1 className="text-xl my-3">My Tasks</h1>
       <div className=" h-[750px] overflow-auto space-y-3">
-        {userTasks.map((item) => (
+        {userSpecificTask?.map((item) => (
           <div
-            key={item.id}
+            key={item?.id}
             className="bg-secondary/10 rounded-md p-3 flex justify-between"
           >
-            <h1>{item.title}</h1>
+            <h1>{item?.title}</h1>
             <div className="flex gap-3">
               <button
-                onClick={() => handleModal(item.id)}
+                onClick={() => handleModal(item?.id)}
                 className="grid place-content-center"
                 title="Details"
               >
@@ -48,7 +52,7 @@ const MyTasks = () => {
               </button>
               <button
                 onClick={() =>
-                  dispatch(updateStatus({ id: item.id, status: "done" }))
+                  dispatch(updateStatus({ id: item?.id, status: "done" }))
                 }
                 className="grid place-content-center"
                 title="Done"
