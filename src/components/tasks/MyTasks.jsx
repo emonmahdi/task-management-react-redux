@@ -12,7 +12,7 @@ import TaskDetailsModal from "./TaskDetailsModal";
 import { useGetTasksByEmailQuery } from "../../redux/features/task/taskApi";
 
 const MyTasks = () => {
-  const { tasks } = useSelector((state) => state.taskSlice);
+  // const { tasks } = useSelector((state) => state.taskSlice);
   const { email: userEmail } = useSelector((state) => state.userSlice);
 
   const { data: userSpecificTask } = useGetTasksByEmailQuery(userEmail);
@@ -29,7 +29,7 @@ const MyTasks = () => {
 
   useEffect(() => {
     dispatch(setUserTasks(userEmail));
-  }, [userEmail, dispatch, tasks]);
+  }, [userEmail, dispatch, userSpecificTask]);
 
   return (
     <div>
@@ -38,13 +38,13 @@ const MyTasks = () => {
       <div className=" h-[750px] overflow-auto space-y-3">
         {userSpecificTask?.map((item) => (
           <div
-            key={item?.id}
+            key={item?._id}
             className="bg-secondary/10 rounded-md p-3 flex justify-between"
           >
             <h1>{item?.title}</h1>
             <div className="flex gap-3">
               <button
-                onClick={() => handleModal(item?.id)}
+                onClick={() => handleModal(item?._id)}
                 className="grid place-content-center"
                 title="Details"
               >
