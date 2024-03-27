@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createUser, googleLogin } from "../redux/features/user/userSlice";
 import toast, { Toaster } from "react-hot-toast";
-import { useAddUserMutation } from "../redux/features/task/taskApi";
+import { usePostUserMutation } from "../redux/features/user/userApi";
+import bcrypt from "bcryptjs";
 
 const SignUp = () => {
   const { handleSubmit, register, control } = useForm();
@@ -17,9 +18,10 @@ const SignUp = () => {
   const { isError, error, isLoading, email } = useSelector(
     (state) => state.userSlice
   );
+
+  const [postUser] = usePostUserMutation();
+
   const dispatch = useDispatch();
-  const [addUser] = useAddUserMutation();
-  console.log(addUser);
   useEffect(() => {
     if (
       password !== undefined &&
@@ -36,8 +38,10 @@ const SignUp = () => {
 
   const onSubmit = ({ name, email, password }) => {
     // Email Password signup
-    console.log(name, email, password);
+    const hashPassword = bcrypt.hashSync(password, 6);
+    console.log(name, email, hashPassword);
     dispatch(createUser({ email, password, name }));
+    postUser({ name, email, password: hashPassword });
   };
 
   useEffect(() => {
