@@ -39,7 +39,7 @@ const SignUp = () => {
   const onSubmit = ({ name, email, password }) => {
     // Email Password signup
     const hashPassword = bcrypt.hashSync(password, 6);
-    console.log(name, email, hashPassword);
+    // console.log(name, email, hashPassword);
     dispatch(createUser({ email, password, name }));
     postUser({ name, email, password: hashPassword });
   };

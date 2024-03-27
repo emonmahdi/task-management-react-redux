@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useAddTaskMutation } from "../../redux/features/task/taskApi";
+import { useGetUsersQuery } from "../../redux/features/user/userApi";
 import Modal from "../ui/Modal";
 import { useForm } from "react-hook-form";
 
@@ -11,6 +12,8 @@ const AddTaskModal = ({ isOpen, setIsOpen, title }) => {
   console.log(data);
   console.log(error);
 
+  const { data: users } = useGetUsersQuery();
+  console.log(users);
   const onCancel = () => {
     reset();
     setIsOpen(false);
@@ -58,11 +61,13 @@ const AddTaskModal = ({ isOpen, setIsOpen, title }) => {
             {...register("assignedTo")}
             className="w-full rounded-md"
           >
-            <option value="Mir Hussain">Mir Hussain</option>
-            <option value="Fahim">Fahim</option>
-            <option value="Mezba">Mezba</option>
-            <option value="Pervez">Pervez</option>
-            <option value="Jhanker Mahbub">Jhanker Mahbub</option>
+            {users?.map((user) => {
+              return (
+                <option key={user._id} value={user?.name}>
+                  {user?.name}
+                </option>
+              );
+            })}
           </select>
         </div>
         <div className="my-3">
